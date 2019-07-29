@@ -1,7 +1,7 @@
 class UserController {
     constructor(formId, formIdUpdate, tableId) {
         this.formEl = document.getElementById(formId);
-        this.formUpdateEl = document.getElementById(formIdUpdate);
+        this.formUpdateEl = document.querySelector(formIdUpdate);
         this.tableEl = document.getElementById(tableId);
         this.onSubmit();
         this.onEditCancel();
@@ -84,16 +84,16 @@ class UserController {
                     dataUser[field.name] = field.value;
                 }
             }
-            else if(field.name === "admin") {
+           /*  else if(field.name === "admin") {
                 dataUser[field.name] = field.checked;
-                /* if (field.checked == true) {
+                if (field.checked == true) {
                     dataUser[field.name] = "Sim";
                 }
                 else {
                     dataUser[field.name] = "Não"; 
-                } */
+                }
                 
-            }
+            } */
             else {
                 dataUser[field.name] = field.value;
             }
@@ -130,13 +130,34 @@ class UserController {
         tr.querySelector(".btn-edit").addEventListener("click", e => {
             console.log(JSON.parse(tr.dataset.user));
             let json = JSON.parse(tr.dataset.user);
-            //console.log(this.forxUpIndex);
-            //this.forxUpIndex = tr.sectionRowIndex;
-            console.log(this.formUpdateEl.querySelectorAll());
-            /* for (let name in json) {
-                let field = this.formUpdateEl.querySelector("[name=" + name.replace("_", "") + "]");
-                console.log(name, field);
-            }  */
+            //let boxUpdateEl = document.getElementById("box-user-update");
+ 
+            for (let name in json){
+                let field = this.formUpdateEl.querySelector("[ name=" + name.replace("_", "") + " ]");
+                //let field = this.formUpdateEl.getElementById(name.replace("_", ""));
+                console.log(field);
+                /* if(field)
+                {
+                    switch (field.type) {
+                        case 'file':
+                        continue;
+                        break;
+
+                        case 'radio':
+                            field = this.formUpdateEl.querySelector("[name=" + name.replace("_", "") + "][value=" + json[name] + "]");
+                            field.checked = true;
+                            break;
+
+                        case 'checkbox':
+                            field.checked = json[name];
+                            break;
+                        default:
+                            field.value = json[name];
+                } // Fechando switch fild
+                
+            } // Fechando if field */
+                //field.value = json[name];
+            } // Fechando for json 
             this.showPanelUpdate();
         });
    
